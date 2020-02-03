@@ -3,10 +3,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RandomizedQueueTest {
+import java.util.ArrayList;
 
+public class RandomizedQueueTest {
+    RandomizedQueue<String> rq;
 	@Before
 	public void setUp() throws Exception {
+		rq = new RandomizedQueue<String>();
 	}
 
 	@Test
@@ -26,7 +29,15 @@ public class RandomizedQueueTest {
 
 	@Test
 	public void testDequeue() {
-		fail("Not yet implemented");
+		ArrayList<String> expectedResults = new ArrayList<String>();
+		expectedResults.add("Hello");
+		expectedResults.add("World");
+		rq.enqueue("Hello");
+		rq.enqueue("World");
+		String actualResult = rq.dequeue();
+		assertTrue("should contain "+actualResult, expectedResults.contains((actualResult)));
+		actualResult =  rq.dequeue();
+		assertTrue("should contain the other word "+actualResult, expectedResults.contains((actualResult)));
 	}
 
 	@Test

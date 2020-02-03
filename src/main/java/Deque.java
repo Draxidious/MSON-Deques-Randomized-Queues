@@ -50,7 +50,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         }
 
-    }
+    } 
 
     public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addLast with null element");
