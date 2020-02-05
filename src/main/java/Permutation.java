@@ -1,3 +1,7 @@
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+
 /******************************************************************************
  *  Name:    Kevin Wayne
  *  Login:   wayne
@@ -6,7 +10,7 @@
  *  Partner Name:    N/A
  *  Partner Login:   N/A
  *  Partner Precept: N/A
- * 
+ *
  *  Compilation:  javac-algs4 Permutation.java
  *  Execution:    java-algs4 Permutation k < <filename>
  *  Dependencies: RandomizedQueue.java StdIn.java StdOut.java
@@ -16,8 +20,12 @@
  ******************************************************************************/
 public class Permutation {
 
-  public static void main(String[] args) {
-
-  }
+    public static void main(String[] args) {
+        String[] str = StdIn.readString().split(" ");
+        StdRandom.shuffle(str);
+        for (int i = 0; i < str.length; i++) {
+            System.out.println(str[i]);
+        }
+    }
 
 }
