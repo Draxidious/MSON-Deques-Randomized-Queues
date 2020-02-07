@@ -50,7 +50,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         }
 
-    } 
+    }
 
     public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addLast with null element");
@@ -97,19 +97,24 @@ public class Deque<Item> implements Iterable<Item> {
 
     public Iterator<Item> iterator() {
         // return an iterator over items in order from front to end
-        return null;
+        return new DequeIterator();
     }
 
     private class DequeIterator implements Iterator<Item> {
+        private Node cur = head;
 
         @Override
         public boolean hasNext() {
-            return false;
+
+            return cur.hasNext() || cur == tail;
         }
 
         @Override
         public Item next() {
-            return null;
+            Item it = cur.getElement();
+            cur = cur.getNext();
+
+            return it;
         }
 
         @Override
@@ -119,7 +124,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        // unit testing (optional)
+
     }
 
     private class Node {

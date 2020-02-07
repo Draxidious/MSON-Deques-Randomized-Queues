@@ -2,6 +2,7 @@
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
@@ -93,6 +94,21 @@ public class DequeTest {
 	@Test (timeout = 500, expected = NoSuchElementException.class)
 	public void testExceptionOnEmptyRemoveLast() {
 		list.removeLast();
+	}
+
+	@Test (timeout = 500)
+	public void testIterator()
+	{
+		list.addFirst("Hello");
+		list.addFirst("World");
+		Iterator<String> iter = list.iterator();
+		assertTrue(iter.hasNext());
+		String cur = iter.next();
+		assertEquals("Should be World but was "+cur,"World",cur );
+		assertTrue(iter.hasNext());
+		 cur = iter.next();
+		assertEquals("Should be Hello but was "+cur,"Hello",cur );
+		assertFalse(iter.hasNext());
 	}
 
 }
