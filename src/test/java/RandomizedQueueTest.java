@@ -45,7 +45,7 @@ public class RandomizedQueueTest {
 		String actualResult = rq.dequeue();
 		assertTrue("should contain "+actualResult, expectedResults.contains((actualResult)));
 		actualResult =  rq.dequeue();
-		assertTrue("should contain the other word "+actualResult, expectedResults.contains((actualResult)));
+		assertTrue("should contain the other word, but is: "+actualResult, expectedResults.contains((actualResult)));
 
 	}
 

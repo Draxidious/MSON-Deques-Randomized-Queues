@@ -1,8 +1,5 @@
 import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdRandom;
-
 import java.util.Iterator;
-import java.util.Scanner;
 
 /******************************************************************************
  *  Name:    Kevin Wayne
@@ -23,21 +20,20 @@ import java.util.Scanner;
 public class Permutation {
 
     public static void main(String[] args) {
-        RandomizedQueue q = new RandomizedQueue();
+        RandomizedQueue<String> q = new RandomizedQueue<>();
         String str = StdIn.readString();
-        String add = "";
+        StringBuilder add = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
 
             if (str.charAt(i) == ' ') {
-                q.enqueue(add);
-                add = "";
+                q.enqueue(add.toString());
+                add = new StringBuilder();
             } else {
-                add += str.charAt(i);
+                add.append(str.charAt(i));
             }
         }
-        Iterator<String> iter = q.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
+        for (String s : q) {
+            System.out.println(s);
         }
 
     }

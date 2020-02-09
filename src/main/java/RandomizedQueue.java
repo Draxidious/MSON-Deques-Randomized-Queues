@@ -60,6 +60,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             queue = Arrays.copyOf(queue, queue.length * 2);
         }
         queue[size] = item;
+        rearel = size;
         size++;
     }
 
@@ -71,6 +72,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int ran = StdRandom.uniform(0, size);
         Item ret = queue[ran];
         queue[ran] = queue[rearel];
+        queue[rearel] = null;
         size--;
         rearel = size - 1;
         return ret;
@@ -78,7 +80,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public Item sample() {
       if (isEmpty()) throw new NoSuchElementException("Tried to sample an empty queue");
-      int num = StdRandom.uniform(0, queue.length);
+      int num = StdRandom.uniform(0, size);
 
         return queue[num];
     }
