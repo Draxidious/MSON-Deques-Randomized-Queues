@@ -102,7 +102,6 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         Node ret = tail;
-        System.out.println(ret.getElement());
         tail = tail.getBefore();
         return ret.getElement();
     }

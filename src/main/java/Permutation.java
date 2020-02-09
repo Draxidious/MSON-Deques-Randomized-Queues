@@ -1,6 +1,9 @@
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdRandom;
 
+import java.util.Iterator;
+import java.util.Scanner;
+
 /******************************************************************************
  *  Name:    Kevin Wayne
  *  Login:   wayne
@@ -20,10 +23,40 @@ import edu.princeton.cs.algs4.StdRandom;
 public class Permutation {
 
     public static void main(String[] args) {
-        String[] str = StdIn.readString().split(" ");
-        StdRandom.shuffle(str);
-        for (int i = 0; i < str.length; i++) {
-            System.out.println(str[i]);
+        RandomizedQueue q = new RandomizedQueue();
+        String str = StdIn.readString();
+        String add = "";
+        for (int i = 0; i < str.length(); i++) {
+
+            if (str.charAt(i) == ' ') {
+                q.enqueue(add);
+                add = "";
+            } else {
+                add += str.charAt(i);
+            }
+        }
+        Iterator<String> iter = q.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+
+    }
+
+    public void test(String str) {
+        RandomizedQueue q = new RandomizedQueue();
+        String add = "";
+        for (int i = 0; i < str.length(); i++) {
+
+            if (str.charAt(i) == ' ') {
+                q.enqueue(add);
+                add = "";
+            } else {
+                add += str.charAt(i);
+            }
+        }
+        Iterator<String> iter = q.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
         }
     }
 
