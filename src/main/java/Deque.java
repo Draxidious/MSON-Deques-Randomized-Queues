@@ -111,6 +111,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (cur == null) throw new NoSuchElementException("There are no more items for iterator to return");
             Item it = cur.getElement();
             cur = cur.getNext();
 
@@ -119,7 +120,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException("remove() Operation not supported");
         }
     }
 
