@@ -16,16 +16,18 @@
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size = 0;
     private Item[] queue;
-    private int rear;
+    private int rearel;
 
     public RandomizedQueue() {
         queue = (Item[]) new Object[1];
-        rear = queue.length;
+        rearel = queue.length - 1;
         // construct an empty randomized queue
     }
 
@@ -40,37 +42,32 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public void enqueue(Item item) {
-        // double size if array is full
+        if (item == null) throw new IllegalArgumentException("Tried to enqueue null element");
         if (size == queue.length) {
-            queue = (Item[]) new Object[queue.length * 2];
-            queue[size] = item;
-            size++;
-        } else {
-            queue[size] = item;
-            size++;
+            queue = Arrays.copyOf(queue, queue.length * 2);
         }
+        queue[size] = item;
+        size++;
     }
 
     public Item dequeue() {
+      if (isEmpty()) throw new NoSuchElementException("Tried to dequeue empty queue");
         if (size == queue.length / 4) {
-            queue = (Item[]) new Object[queue.length / 2];
-
-            size--;
-        } else {
-           size--;
+            queue = Arrays.copyOf(queue, queue.length / 2);
         }
-        // half is array is quarter filled
-        // remove and return a random item
-        // keep track of rear with number(points to last el)
-        // dequeue random, then replace it with rear
-        // update rear to next last element
-
-        return null;
+        int ran = StdRandom.uniform(0, size);
+        Item ret = queue[ran];
+        queue[ran] = queue[rearel];
+        size--;
+        rearel = size - 1;
+        return ret;
     }
 
     public Item sample() {
-        // return a random item (but do not remove it)
-        return null;
+      if (isEmpty()) throw new NoSuchElementException("Tried to sample an empty queue");
+      int num = StdRandom.uniform(0, queue.length);
+
+        return queue[num];
     }
 
     public Iterator<Item> iterator() {
@@ -80,30 +77,34 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RandomIterator implements Iterator<Item> {
 
-        private Item[] iterArray = (Item[]) new Object[queue.length];
+        private Item[] iterArray = (Item[]) new Object[size];
+        private int num = 0;
 
         public RandomIterator() {
-            for (int i = 0; i < iterArray.length; i++) {
+            for (int i = 0; i < size; i++) {
                 iterArray[i] = queue[i];
             }
+            StdRandom.shuffle(iterArray);
         }
 
         @Override
         public boolean hasNext() {
 
-            return false;
+            return num != size;
         }
 
         @Override
         public Item next() {
+            if (!hasNext()) throw new NoSuchElementException("There are no more items for iterator to return");
 
-
-            return null;
+            Item el = iterArray[num];
+            num++;
+            return el;
         }
 
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException("remove() Operation not supported");
         }
     }
 
