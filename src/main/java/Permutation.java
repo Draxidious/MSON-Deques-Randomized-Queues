@@ -41,23 +41,4 @@ public class Permutation {
         }
 
     }
-
-    public void test(String str) {
-        RandomizedQueue q = new RandomizedQueue();
-        String add = "";
-        for (int i = 0; i < str.length(); i++) {
-
-            if (str.charAt(i) == ' ') {
-                q.enqueue(add);
-                add = "";
-            } else {
-                add += str.charAt(i);
-            }
-        }
-        Iterator<String> iter = q.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-    }
-
 }
