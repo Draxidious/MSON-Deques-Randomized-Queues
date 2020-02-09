@@ -17,10 +17,22 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Deque class for princeton project.
+ * @param <Item> object of type random
+ */
 public class Deque<Item> implements Iterable<Item> {
+    /**
+     * The head node of the queue.
+     */
     private Node head;
+    /**
+     * The tail end of queue.
+     */
     private Node tail;
-
+    /**
+     * The size of the queue.
+     */
     private int size;
 
     public Deque() {
@@ -100,7 +112,13 @@ public class Deque<Item> implements Iterable<Item> {
         return new DequeIterator();
     }
 
+    /**
+     * Iterator class to Iterate over deque.
+     */
     private class DequeIterator implements Iterator<Item> {
+        /**
+         * Current node to iterate over queue.
+         */
         private Node cur = head;
 
         @Override
@@ -128,10 +146,21 @@ public class Deque<Item> implements Iterable<Item> {
 
     }
 
+    /**
+     * Node class for handling deque.
+     */
     private class Node {
-
+        /**
+         * Element in node.
+         */
         private Item element;
+        /**
+         * Next node linked by current node.
+         */
         private Node next;
+        /**
+         * Node linked to current node.
+         */
         private Node before;
 
         Node(Item el) {

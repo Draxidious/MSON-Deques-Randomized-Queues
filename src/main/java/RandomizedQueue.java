@@ -20,9 +20,22 @@ import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdRandom;
 
+/**
+ * Randomized Queue class.
+ * @param <Item> object of type item.
+ */
 public class RandomizedQueue<Item> implements Iterable<Item> {
+  /**
+   * Size of usable array, rest of array is empty.
+   */
     private int size = 0;
-    private Item[] queue;
+  /**
+   * Array used to utilize constant-time retrieval.
+   */
+  private Item[] queue;
+  /**
+   * Rear element index number.
+   */
     private int rearel;
 
     public RandomizedQueue() {
@@ -75,9 +88,18 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new RandomIterator();
     }
 
+  /**
+   * Random Iterator that retrieves items in random order.
+   */
     private class RandomIterator implements Iterator<Item> {
-
-        private Item[] iterArray = (Item[]) new Object[size];
+      /**
+       * An array to traverse for iterator.
+       * Used as copy of usable array portion of random queue
+       */
+      private Item[] iterArray = (Item[]) new Object[size];
+      /**
+       * Index number to traverse array.
+       */
         private int num = 0;
 
         public RandomIterator() {
