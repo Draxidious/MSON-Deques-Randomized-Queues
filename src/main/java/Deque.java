@@ -106,7 +106,7 @@ public class Deque<Item> implements Iterable<Item> {
         @Override
         public boolean hasNext() {
 
-            return cur.hasNext() || cur == tail;
+            return cur != null;
         }
 
         @Override
