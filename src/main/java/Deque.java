@@ -218,7 +218,7 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         boolean hasBefore() {
-            return next != null;
+            return before != null;
         }
 
     }
