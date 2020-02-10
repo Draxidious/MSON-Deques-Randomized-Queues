@@ -97,6 +97,23 @@ public class DequeTest {
 	}
 
 	@Test (timeout = 500)
+	public void removeLastPrincetonTest1()
+	{
+		Deque<Integer> deque = new Deque<>();
+		deque.addFirst(1);
+		int rem = deque.removeLast();
+		assertEquals(1,rem);
+		deque.addFirst(3);
+		deque.addFirst(4);
+		deque.addFirst(5);
+		deque.addFirst(6);
+		rem = deque.removeLast();
+		assertEquals(3,rem);
+		deque.addFirst(8);
+		rem = deque.removeLast();
+		assertEquals(4,rem);
+	}
+	@Test (timeout = 500)
 	public void testIterator()
 	{
 		list.addFirst("Hello");
