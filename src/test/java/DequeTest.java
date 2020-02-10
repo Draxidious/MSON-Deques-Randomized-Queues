@@ -113,6 +113,27 @@ public class DequeTest {
 		rem = deque.removeLast();
 		assertEquals(4,rem);
 	}
+
+	@Test (timeout = 500)
+	public void removeLastPrincetonTest2()
+	{
+		Deque<Integer> deque = new Deque<Integer>();
+		deque.addFirst(1);
+		int rem = deque.removeLast();
+		assertEquals(1,rem);
+		deque.addFirst(3);
+		rem = deque.removeFirst();
+		assertEquals(3,rem);
+		deque.addLast(5);
+		assertEquals(1,deque.size());
+
+		deque.addFirst(7);
+
+		rem = deque.removeFirst();
+
+		assertEquals(7,rem);
+	}
+
 	@Test (timeout = 500)
 	public void testIterator()
 	{

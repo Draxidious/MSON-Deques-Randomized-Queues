@@ -52,73 +52,78 @@ public class Deque<Item> implements Iterable<Item> {
 
     public void addFirst(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addFirst with null element");
-        size++;
-        if (tail == null) {
-            tail = new Node(item);
-        } else if (head == null) {
+
+        if (isEmpty()) {
             head = new Node(item);
-            head.setNext(tail);
-            tail.setBefore(head);
         } else {
             Node newNode = new Node(item);
             newNode.setNext(head);
             head.setBefore(newNode);
             head = newNode;
-
+        }
+        size++;
+        if (size == 2) {
+            tail = head.getNext();
         }
     }
 
     public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addLast with null element");
-        size++;
-        if (head == null) {
+        if (isEmpty()) {
             head = new Node(item);
-        } else if (tail == null) {
-            tail = new Node(item);
-            tail.setBefore(head);
-            head.setNext(tail);
+        } else if (size == 1) {
+            Node newNode = new Node(item);
+            head.setNext(newNode);
+            newNode.setBefore(head);
+            tail = newNode;
         } else {
             Node newNode = new Node(item);
             tail.setNext(newNode);
             newNode.setBefore(tail);
             tail = newNode;
-
+        }
+        size++;
+        if (size == 2) {
+            head = tail.getBefore();
         }
     }
 
     public Item removeFirst() {
         if (isEmpty()) throw new NoSuchElementException("tried to removeFirst with empty deque");
-        size--;
         Node ret;
-        if (head == null && tail != null) {
-            ret = tail;
+        if (size == 1) {
+            ret = head;
+            head = null;
+        } else {
+            ret = head;
+            head = head.getNext();
+            head.setBefore(null);
+        }
+        size--;
+        if (size == 1) {
             tail = null;
-            return ret.getElement();
         }
-        if (head.hasNext()) {
-            head.getNext().setBefore(null);
-        }
-        ret = head;
-        head = head.getNext();
         return ret.getElement();
     }
 
     public Item removeLast() {
         if (isEmpty()) throw new NoSuchElementException("tried to removeLast with empty deque");
-
-        size--;
         Node ret;
-        if (head != null && tail == null) {
+        if (size == 1) {
             ret = head;
             head = null;
-            return ret.getElement();
+        } else {
+            ret = tail;
+            tail = tail.getBefore();
+            tail.setNext(null);
         }
-        if (tail.hasBefore()) {
-            tail.getBefore().setNext(null);
+        size--;
+        if (size == 1) {
+            head = tail;
+            tail = null;
         }
 
-        ret = tail;
-        tail = tail.getBefore();
+
         return ret.getElement();
     }
 
@@ -225,18 +230,15 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public String toString() {
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         Node cur = head;
-        if (head == null && tail != null) {
-            return tail.getElement() + "\n";
-        }
-        if (head == null && tail == null) return "";
-        do {
-            ret += cur.getElement() + "\n";
+        if (isEmpty()) return ".\n";
+        if (head == null && tail != null) return tail.getElement() + "\n";
+        while (cur != null) {
+            ret.append(cur.getElement()).append("\n");
             cur = cur.getNext();
         }
-        while (cur.hasNext());
-        return ret;
+        return ret.toString() + "\n-----";
     }
 }
 
