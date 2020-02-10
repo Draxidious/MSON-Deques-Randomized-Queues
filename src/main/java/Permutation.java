@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.StdIn;
+
 import java.util.Iterator;
 
 /******************************************************************************
@@ -32,9 +33,12 @@ public class Permutation {
                 add.append(str.charAt(i));
             }
         }
-        for (String s : q) {
-            System.out.println(s);
+        Iterator iter = q.iterator();
+        for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+            System.out.println(iter.next());
         }
 
     }
+
+
 }
