@@ -35,10 +35,14 @@ public class Permutation {
         }
         Iterator iter = q.iterator();
         for (int i = 0; i < Integer.parseInt(args[0]); i++) {
-            System.out.println(iter.next());
+            if (iter.hasNext()) {
+                System.out.println(iter.next());
+            } else {
+                break;
+            }
+
         }
 
     }
-
 
 }
