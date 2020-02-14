@@ -18,12 +18,23 @@ import java.util.Iterator;
  *  Description:  Takes an integer k as a command-line argument; reads in a sequence of strings from standard input using StdIn.readString(); and prints exactly k of them, uniformly at random. 
  *  Prints each item from the sequence at most once. 
  ******************************************************************************/
-public class Permutation {
 
+/**
+ * Permutation class.
+ */
+public class Permutation {
+    /**
+     * Main method.
+     * @param args k
+     */
     public static void main(String[] args) {
+        int k = Integer.parseInt(args[0]);
         RandomizedQueue<String> q = new RandomizedQueue<>();
         while (!StdIn.isEmpty()) {
             q.enqueue(StdIn.readString());
+            if (q.size() > k) {
+                q.dequeue();
+            }
         }
 
 

@@ -36,20 +36,38 @@ public class Deque<Item> implements Iterable<Item> {
      */
     private int size;
 
+    /**
+     * Deque class contrstructor.
+     */
     public Deque() {
         head = null;
         tail = null;
         size = 0;
     }
 
+    /**
+     * Checks if the deque is empty.
+     *
+     * @return boolean
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Returns size.
+     *
+     * @return size
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Adds element to front of Deque.
+     *
+     * @param item element to be added
+     */
     public void addFirst(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addFirst with null element");
 
@@ -67,6 +85,11 @@ public class Deque<Item> implements Iterable<Item> {
         }
     }
 
+    /**
+     * Adds element to tail end of Deque.
+     *
+     * @param item element to be added
+     */
     public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException("tried to addLast with null element");
         if (isEmpty()) {
@@ -88,6 +111,11 @@ public class Deque<Item> implements Iterable<Item> {
         }
     }
 
+    /**
+     * Removes first element from front of Deque.
+     *
+     * @return element that was removed
+     */
     public Item removeFirst() {
         if (isEmpty()) throw new NoSuchElementException("tried to removeFirst with empty deque");
         Node ret;
@@ -106,6 +134,11 @@ public class Deque<Item> implements Iterable<Item> {
         return ret.getElement();
     }
 
+    /**
+     * Removes last element from end of Deque.
+     *
+     * @return element that was removed
+     */
     public Item removeLast() {
         if (isEmpty()) throw new NoSuchElementException("tried to removeLast with empty deque");
         Node ret;
@@ -127,6 +160,11 @@ public class Deque<Item> implements Iterable<Item> {
         return ret.getElement();
     }
 
+    /**
+     * Returns a usable iterator to run through elements in Deque.
+     *
+     * @return iterator to go over deque
+     */
     public Iterator<Item> iterator() {
         // return an iterator over items in order from front to end
         return new DequeIterator();
@@ -141,12 +179,22 @@ public class Deque<Item> implements Iterable<Item> {
          */
         private Node cur = head;
 
+        /**
+         * Checks if there is another element to go through in the deque.
+         *
+         * @return boolean
+         */
         @Override
         public boolean hasNext() {
 
             return cur != null;
         }
 
+        /**
+         * Returns the next item.
+         *
+         * @return next item
+         */
         @Override
         public Item next() {
             if (cur == null) throw new NoSuchElementException("There are no more items for iterator to return");
@@ -156,6 +204,9 @@ public class Deque<Item> implements Iterable<Item> {
             return it;
         }
 
+        /**
+         * Unsupported.
+         */
         @Override
         public void remove() {
             throw new UnsupportedOperationException("remove() Operation not supported");
@@ -183,50 +234,60 @@ public class Deque<Item> implements Iterable<Item> {
          */
         private Node before;
 
+        /**
+         * Node Constructor.
+         *
+         * @param el element to be in Node
+         */
         Node(Item el) {
             element = el;
             next = null;
             before = null;
         }
 
-        Node() {
-            element = null;
-            next = null;
-            before = null;
-        }
-
+        /**
+         * Set the next node.
+         *
+         * @param el node to set to
+         */
         void setNext(Node el) {
             next = el;
         }
 
+        /**
+         * Set the node before.
+         *
+         * @param el node to set to
+         */
         void setBefore(Node el) {
             before = el;
         }
 
-        public void setElement(Item el) {
-            element = el;
-        }
-
+        /**
+         * Get element within Node.
+         *
+         * @return element
+         */
         Item getElement() {
             return element;
         }
 
+        /**
+         * Return next node.
+         *
+         * @return afterNode
+         */
         Node getNext() {
             return next;
         }
-
+        /**
+         * Return the Node before current.
+         *
+         * @return beforeNode
+         */
         Node getBefore() {
             return before;
         }
-
-        boolean hasNext() {
-            return next != null;
-        }
-
-        boolean hasBefore() {
-            return before != null;
-        }
-
     }
 
     public String toString() {
