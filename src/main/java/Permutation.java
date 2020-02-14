@@ -32,7 +32,7 @@ public class Permutation {
         RandomizedQueue<String> q = new RandomizedQueue<>();
         while (!StdIn.isEmpty()) {
             q.enqueue(StdIn.readString());
-            if (q.size() > k) {
+            if (q.size() >= k) {
                 q.dequeue();
             }
         }
