@@ -22,17 +22,11 @@ public class Permutation {
 
     public static void main(String[] args) {
         RandomizedQueue<String> q = new RandomizedQueue<>();
-        String str = StdIn.readString();
-        StringBuilder add = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-
-            if (str.charAt(i) == ' ') {
-                q.enqueue(add.toString());
-                add = new StringBuilder();
-            } else {
-                add.append(str.charAt(i));
-            }
+        while (!StdIn.isEmpty()) {
+            q.enqueue(StdIn.readString());
         }
+
+
         Iterator iter = q.iterator();
         for (int i = 0; i < Integer.parseInt(args[0]); i++) {
             if (iter.hasNext()) {

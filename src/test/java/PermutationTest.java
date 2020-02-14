@@ -5,6 +5,6 @@ public class PermutationTest {
     public void Test1()
     {
         Permutation p = new Permutation();
-        p.test("A B C D E F G H I","3");
+
     }
 }
